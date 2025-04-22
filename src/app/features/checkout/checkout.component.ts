@@ -16,7 +16,7 @@ import { CartService } from '../../core/services/cart.service';
           @for (item of cartService.cart().items; track item.product.id) {
             <div class="order-item">
               <span>{{item.product.name}} x {{item.quantity}}</span>
-              <span>\${{(item.product.price * item.quantity).toFixed(2)}} {{item.quantity}}</span>
+              <span>\${{(item.product.price * item.quantity).toFixed(2)}}</span>
             </div>
           }
           <div class="total">
