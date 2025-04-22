@@ -1,0 +1,75 @@
+<header class="header fixed-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a routerLink="/">
+          <h1>VitaBand</h1>
+        </a>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="nav-desktop">
+        <ul>
+          <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+          <li><a routerLink="/products" routerLinkActive="active">Products</a></li>
+          
+          <!-- Admin Links (only visible to admins) -->
+          @if (authService.isAdmin()) {
+            <li><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+          }
+          
+          <!-- Auth Links -->
+          @if (authService.currentUser()) {
+            <li><a routerLink="/profile" routerLinkActive="active">My Account</a></li>
+            <li><a routerLink="/orders" routerLinkActive="active">Orders</a></li>
+            <li><a (click)="logout()" class="logout-btn">Logout</a></li>
+          } @else {
+            <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
+          }
+        </ul>
+      </nav>
+      
+      <!-- Cart Icon -->
+      <div class="cart-icon">
+        <a routerLink="/cart">
+          <span class="material-icons">shopping_cart</span>
+          @if (cartService.cart().totalItems > 0) {
+            <span class="cart-badge">{{ cartService.cart().totalItems }}</span>
+          }
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-toggle" (click)="toggleMobileMenu()">
+        <span class="material-icons">{{ isMobileMenuOpen ? 'close' : 'menu' }}</span>
+      </button>
+    </div>
+    
+    <!-- Mobile Navigation -->
+    @if (isMobileMenuOpen) {
+      <nav class="nav-mobile">
+        <ul>
+          <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="toggleMobileMenu()">Home</a></li>
+          <li><a routerLink="/products" routerLinkActive="active" (click)="toggleMobileMenu()">Products</a></li>
+          <li><a routerLink="/cart" routerLinkActive="active" (click)="toggleMobileMenu()">Cart</a></li>
+          
+          <!-- Admin Links (only visible to admins) -->
+          @if (authService.isAdmin()) {
+            <li><a routerLink="/admin" routerLinkActive="active" (click)="toggleMobileMenu()">Admin</a></li>
+          }
+          
+          <!-- Auth Links -->
+          @if (authService.currentUser()) {
+            <li><a routerLink="/profile" routerLinkActive="active" (click)="toggleMobileMenu()">My Account</a></li>
+            <li><a routerLink="/orders" routerLinkActive="active" (click)="toggleMobileMenu()">Orders</a></li>
+            <li><a (click)="logout()" class="logout-btn">Logout</a></li>
+          } @else {
+            <li><a routerLink="/login" routerLinkActive="active" (click)="toggleMobileMenu()">Login</a></li>
+            <li><a routerLink="/register" routerLinkActive="active" (click)="toggleMobileMenu()">Register</a></li>
+          }
+        </ul>
+      </nav>
+    }
+  </div>
+</header>

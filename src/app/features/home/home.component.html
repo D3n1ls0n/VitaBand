@@ -1,0 +1,144 @@
+<div class="home-container">
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Elevate Your Performance</h1>
+        <p>Discover premium sports products designed to help you achieve your fitness goals.</p>
+        <div class="hero-buttons">
+          <a routerLink="/products" class="btn-primary">Shop Now</a>
+          <a routerLink="/products" class="btn-secondary">Explore Products</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured-products">
+    <div class="container">
+      <h2 class="section-title">Featured Products</h2>
+      
+      @if (isLoading) {
+        <div class="loading-spinner">
+          <p>Loading products...</p>
+        </div>
+      } @else if (featuredProducts.length === 0) {
+        <p class="no-products">No featured products available.</p>
+      } @else {
+        <div class="products-grid">
+          @for (product of featuredProducts; track product.id) {
+            <div class="product-card">
+              <div class="product-image">
+                <img [src]="product.imageUrl" [alt]="product.name">
+                @if (product.discount) {
+                  <span class="discount-badge">-{{product.discount}}%</span>
+                }
+              </div>
+              <div class="product-info">
+                <h3 class="product-name">{{product.name}}</h3>
+                <div class="product-category">{{product.category}}</div>
+                <div class="product-rating">
+                  <span class="rating-stars">
+                    @for (star of [1, 2, 3, 4, 5]; track star) {
+                      <i class="material-icons">
+                        {{ star <= math.floor(product.rating) ? 'star' : 
+                           star - 0.5 <= product.rating ? 'star_half' : 'star_border' }}
+                      </i>
+                    }
+                  </span>
+                  <span class="rating-value">{{product.rating}}</span>
+                </div>
+                <div class="product-price">
+                  @if (product.discount) {
+                    <span class="original-price">\${{product.price.toFixed(2)}}</span>
+                    <span class="discount-price">\${{(product.price * (1 - product.discount / 100)).toFixed(2)}}</span>
+                  } @else {
+                    <span>\${{product.price.toFixed(2)}}</span>
+                  }
+                </div>
+                <a [routerLink]="['/products', product.id]" class="btn-view-product">View Product</a>
+              </div>
+            </div>
+          }
+        </div>
+      }
+      
+      <div class="view-all-container">
+        <a routerLink="/products" class="btn-view-all">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <h2 class="section-title">Shop By Category</h2>
+      <div class="categories-grid">
+        <a routerLink="/products" class="category-card" [queryParams]="{category: 'Wearables'}">
+          <div class="category-image">
+            <img src="https://picsum.photos/id/1/500/500" alt="Wearables">
+          </div>
+          <h3>Wearables</h3>
+        </a>
+        <a routerLink="/products" class="category-card" [queryParams]="{category: 'Fitness Equipment'}">
+          <div class="category-image">
+            <img src="https://picsum.photos/id/6/500/500" alt="Fitness Equipment">
+          </div>
+          <h3>Fitness Equipment</h3>
+        </a>
+        <a routerLink="/products" class="category-card" [queryParams]="{category: 'Nutrition'}">
+          <div class="category-image">
+            <img src="https://picsum.photos/id/5/500/500" alt="Nutrition">
+          </div>
+          <h3>Nutrition</h3>
+        </a>
+        <a routerLink="/products" class="category-card" [queryParams]="{category: 'Apparel'}">
+          <div class="category-image">
+            <img src="https://picsum.photos/id/8/500/500" alt="Apparel">
+          </div>
+          <h3>Apparel</h3>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Media Section -->
+  <section class="social-section">
+    <div class="container">
+      <h2 class="section-title">Follow Us on Social Media</h2>
+      <p class="section-subtitle">Stay updated with our latest products and promotions</p>
+      <div class="social-icons">
+        <a href="https://facebook.com" target="_blank" class="social-icon facebook">
+          <i class="material-icons">facebook</i>
+          <span>Facebook</span>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-icon instagram">
+          <i class="material-icons">photo_camera</i>
+          <span>Instagram</span>
+        </a>
+        <a href="https://tiktok.com" target="_blank" class="social-icon tiktok">
+          <i class="material-icons">music_note</i>
+          <span>TikTok</span>
+        </a>
+        <a href="https://twitter.com" target="_blank" class="social-icon twitter">
+          <i class="material-icons">chat</i>
+          <span>Twitter</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2>Join Our Newsletter</h2>
+        <p>Subscribe to get special offers, free giveaways, and product launches.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

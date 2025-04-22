@@ -1,0 +1,36 @@
+.not-found-container {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.not-found-content {
+  max-width: 600px;
+}
+
+.not-found-content h1 {
+  font-size: 6rem;
+  margin-bottom: var(--space-2);
+  color: var(--primary);
+}
+
+.not-found-content h2 {
+  font-size: 2rem;
+  margin-bottom: var(--space-3);
+  color: var(--black);
+}
+
+.not-found-content p {
+  margin-bottom: var(--space-4);
+  color: var(--gray-dark);
+}
+
+.not-found-content .btn-primary {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  margin-top: var(--space-2);
+  font-weight: 500;
+}
